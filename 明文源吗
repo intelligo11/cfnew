@@ -675,38 +675,38 @@ export default {
                         
                         const translations = {
                             zh: {
-                                title: '终端',
-                                terminal: '终端',
-                                congratulations: '恭喜你来到这',
-                                enterU: '请输入你U变量的值',
-                                enterD: '请输入你D变量的值',
-                                command: '命令: connect [',
-                                uuid: 'UUID',
-                                path: 'PATH',
-                                inputU: '输入U变量的内容并且回车...',
-                                inputD: '输入D变量的内容并且回车...',
-                                connecting: '正在连接...',
-                                invading: '正在入侵...',
-                                success: '连接成功！返回结果...',
-                                error: '错误: 无效的UUID格式',
-                                reenter: '请重新输入有效的UUID'
+                                title: '1',
+                                terminal: '1',
+                                congratulations: '1',
+                                enterU: '1',
+                                enterD: '1',
+                                command: '1: connect [',
+                                uuid: '1',
+                                path: '1',
+                                inputU: '1...',
+                                inputD: '1...',
+                                connecting: '1...',
+                                invading: '1...',
+                                success: '1！1...',
+                                error: '1: 1',
+                                reenter: '1'
                             },
                             fa: {
-                                title: 'ترمینال',
-                                terminal: 'ترمینال',
-                                congratulations: 'تبریک می‌گوییم به شما',
-                                enterU: 'لطفا مقدار متغیر U خود را وارد کنید',
-                                enterD: 'لطفا مقدار متغیر D خود را وارد کنید',
-                                command: 'دستور: connect [',
+                                title: '1',
+                                terminal: '1',
+                                congratulations: '1 1 1 شما',
+                                enterU: '1 1 1 U 1 را وارد 1',
+                                enterD: '1 1 1 D 1 را وارد 1',
+                                command: '1: connect [',
                                 uuid: 'UUID',
                                 path: 'PATH',
-                                inputU: 'محتویات متغیر U را وارد کرده و Enter را بزنید...',
-                                inputD: 'محتویات متغیر D را وارد کرده و Enter را بزنید...',
-                                connecting: 'در حال اتصال...',
-                                invading: 'در حال نفوذ...',
-                                success: 'اتصال موفق! در حال بازگشت نتیجه...',
-                                error: 'خطا: فرمت UUID نامعتبر',
-                                reenter: 'لطفا UUID معتبر را دوباره وارد کنید'
+                                inputU: '1 1 U را 1 1 و Enter را 1...',
+                                inputD: '1 1 D را وارد 1 و Enter را 1...',
+                                connecting: 'در 1 1
+                                invading: 'در 1 1...',
+                                success: '1 1! در حال 1 11
+                                error: 'خطا: 1 UUID 1',
+                                reenter: '1 UUID 1 را 1 1 1'
                             }
                         };
                         
@@ -858,225 +858,7 @@ export default {
 </head>
 <body>
     <div class="matrix-bg"></div>
-    <div class="matrix-rain"></div>
-    <div class="matrix-code-rain" id="matrixCodeRain"></div>
-        <div class="matrix-text">${t.terminal}</div>
-        <div style="position: fixed; top: 20px; left: 20px; z-index: 1000;">
-            <select id="languageSelector" style="background: rgba(0, 20, 0, 0.9); border: 2px solid #00ff00; color: #00ff00; padding: 8px 12px; font-family: 'Courier New', monospace; font-size: 14px; cursor: pointer; text-shadow: 0 0 5px #00ff00; box-shadow: 0 0 15px rgba(0, 255, 0, 0.4);" onchange="changeLanguage(this.value)">
-                <option value="zh" ${!isFarsi ? 'selected' : ''}>🇨🇳 中文</option>
-                <option value="fa" ${isFarsi ? 'selected' : ''}>🇮🇷 فارسی</option>
-            </select>
-        </div>
-    <div class="terminal">
-        <div class="terminal-header">
-            <div class="terminal-buttons">
-                <div class="terminal-button"></div>
-                <div class="terminal-button"></div>
-                <div class="terminal-button"></div>
-            </div>
-                <div class="terminal-title">${t.terminal}</div>
-        </div>
-        <div class="terminal-body" id="terminalBody">
-            <div class="terminal-line">
-                <span class="terminal-prompt">root:~$</span>
-                    <span class="terminal-output">${t.congratulations}</span>
-            </div>
-            <div class="terminal-line">
-                <span class="terminal-prompt">root:~$</span>
-                    <span class="terminal-output">${cp && cp.trim() ? t.enterD : t.enterU}</span>
-            </div>
-            <div class="terminal-line">
-                <span class="terminal-prompt">root:~$</span>
-                    <span class="terminal-output">${t.command}${cp && cp.trim() ? t.path : t.uuid}]</span>
-            </div>
-            <div class="terminal-line">
-                <span class="terminal-prompt">root:~$</span>
-                    <input type="text" class="terminal-input" id="uuidInput" placeholder="${cp && cp.trim() ? t.inputD : t.inputU}" autofocus>
-                <span class="terminal-cursor"></span>
-            </div>
-        </div>
-    </div>
-    <script>
-        function createMatrixRain() {
-            const matrixContainer = document.getElementById('matrixCodeRain');
-            const matrixChars = '01ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-            const columns = Math.floor(window.innerWidth / 18);
-            
-            for (let i = 0; i < columns; i++) {
-                const column = document.createElement('div');
-                column.className = 'matrix-column';
-                column.style.left = (i * 18) + 'px';
-                column.style.animationDelay = Math.random() * 15 + 's';
-                column.style.animationDuration = (Math.random() * 15 + 8) + 's';
-                column.style.fontSize = (Math.random() * 4 + 12) + 'px';
-                column.style.opacity = Math.random() * 0.8 + 0.2;
-                
-                let text = '';
-                const charCount = Math.floor(Math.random() * 30 + 20);
-                for (let j = 0; j < charCount; j++) {
-                    const char = matrixChars[Math.floor(Math.random() * matrixChars.length)];
-                    const brightness = Math.random() > 0.1 ? '#00ff00' : '#00aa00';
-                    text += '<span style="color: ' + brightness + ';">' + char + '</span><br>';
-                }
-                column.innerHTML = text;
-                matrixContainer.appendChild(column);
-            }
-            
-            setInterval(function() {
-                const columns = matrixContainer.querySelectorAll('.matrix-column');
-                columns.forEach(function(column) {
-                    if (Math.random() > 0.95) {
-                        const chars = column.querySelectorAll('span');
-                        if (chars.length > 0) {
-                            const randomChar = chars[Math.floor(Math.random() * chars.length)];
-                            randomChar.style.color = '#ffffff';
-                            setTimeout(function() {
-                                randomChar.style.color = '#00ff00';
-                            }, 200);
-                        }
-                    }
-                });
-            }, 100);
-        }
-        
-        function isValidUUID(uuid) {
-            const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
-            return uuidRegex.test(uuid);
-        }
-        
-        function addTerminalLine(content, type = 'output') {
-            const terminalBody = document.getElementById('terminalBody');
-            const line = document.createElement('div');
-            line.className = 'terminal-line';
-            
-            const prompt = document.createElement('span');
-            prompt.className = 'terminal-prompt';
-            prompt.textContent = 'root:~$';
-            
-            const output = document.createElement('span');
-            output.className = 'terminal-' + type;
-            output.textContent = content;
-            
-            line.appendChild(prompt);
-            line.appendChild(output);
-            terminalBody.appendChild(line);
-            
-            terminalBody.scrollTop = terminalBody.scrollHeight;
-        }
-        
-        function handleUUIDInput() {
-            const input = document.getElementById('uuidInput');
-            const inputValue = input.value.trim();
-            const cp = '${ cp }';
-            
-            if (inputValue) {
-                addTerminalLine(atob('Y29ubmVjdCA=') + inputValue, 'output');
-                    
-                    const translations = {
-                        zh: {
-                            connecting: '正在连接...',
-                            invading: '正在入侵...',
-                            success: '连接成功！返回结果...',
-                            error: '错误: 无效的UUID格式',
-                            reenter: '请重新输入有效的UUID'
-                        },
-                        fa: {
-                            connecting: 'در حال اتصال...',
-                            invading: 'در حال نفوذ...',
-                            success: 'اتصال موفق! در حال بازگشت نتیجه...',
-                            error: 'خطا: فرمت UUID نامعتبر',
-                            reenter: 'لطفا UUID معتبر را دوباره وارد کنید'
-                        }
-                    };
-                    const browserLang = navigator.language || navigator.userLanguage || '';
-                    const isFarsi = browserLang.includes('fa') || browserLang.includes('fa-IR');
-                    const t = translations[isFarsi ? 'fa' : 'zh'];
-                
-                if (cp) {
-                    const cleanInput = inputValue.startsWith('/') ? inputValue : '/' + inputValue;
-                        addTerminalLine(t.connecting, 'output');
-                    setTimeout(() => {
-                            addTerminalLine(t.success, 'success');
-                        setTimeout(() => {
-                            window.location.href = cleanInput;
-                        }, 1000);
-                    }, 500);
-                } else {
-                    if (isValidUUID(inputValue)) {
-                        addTerminalLine(t.invading, 'output');
-                    setTimeout(() => {
-                            addTerminalLine(t.success, 'success');
-                        setTimeout(() => {
-                                window.location.href = '/' + inputValue;
-                        }, 1000);
-                    }, 500);
-                } else {
-                        addTerminalLine(t.error, 'error');
-                        addTerminalLine(t.reenter, 'output');
-                    }
-                }
-                
-                input.value = '';
-            }
-        }
-            
-            function changeLanguage(lang) {
-                localStorage.setItem('preferredLanguage', lang);
-                // 设置Cookie（有效期1年）
-                const expiryDate = new Date();
-                expiryDate.setFullYear(expiryDate.getFullYear() + 1);
-                document.cookie = 'preferredLanguage=' + lang + '; path=/; expires=' + expiryDate.toUTCString() + '; SameSite=Lax';
-                // 刷新页面，不使用URL参数
-                window.location.reload();
-            }
-            
-            // 页面加载时检查 localStorage 和 Cookie，并清理URL参数
-            window.addEventListener('DOMContentLoaded', function() {
-                function getCookie(name) {
-                    const value = '; ' + document.cookie;
-                    const parts = value.split('; ' + name + '=');
-                    if (parts.length === 2) return parts.pop().split(';').shift();
-                    return null;
-                }
-                
-                const savedLang = localStorage.getItem('preferredLanguage') || getCookie('preferredLanguage');
-                const urlParams = new URLSearchParams(window.location.search);
-                const urlLang = urlParams.get('lang');
-                
-                // 如果URL中有语言参数，移除它并设置Cookie
-                if (urlLang) {
-                    const currentUrl = new URL(window.location.href);
-                    currentUrl.searchParams.delete('lang');
-                    const newUrl = currentUrl.toString();
-                    
-                    // 设置Cookie
-                    const expiryDate = new Date();
-                    expiryDate.setFullYear(expiryDate.getFullYear() + 1);
-                    document.cookie = 'preferredLanguage=' + urlLang + '; path=/; expires=' + expiryDate.toUTCString() + '; SameSite=Lax';
-                    localStorage.setItem('preferredLanguage', urlLang);
-                    
-                    // 使用history API移除URL参数，不刷新页面
-                    window.history.replaceState({}, '', newUrl);
-                } else if (savedLang) {
-                    // 如果localStorage中有但Cookie中没有，同步到Cookie
-                    const expiryDate = new Date();
-                    expiryDate.setFullYear(expiryDate.getFullYear() + 1);
-                    document.cookie = 'preferredLanguage=' + savedLang + '; path=/; expires=' + expiryDate.toUTCString() + '; SameSite=Lax';
-                }
-            });
-        
-        document.addEventListener('DOMContentLoaded', function() {
-            createMatrixRain();
-            
-            const input = document.getElementById('uuidInput');
-            input.focus();
-            input.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    handleUUIDInput();
-                }
-            });
-        });
-    </script>
+    
 </body>
 </html>`;
 					return new Response(terminalHtml, { status: 200, headers: { 'Content-Type': 'text/html; charset=utf-8' } });
